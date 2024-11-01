@@ -31,6 +31,7 @@ p {
     background-color: #fff;
     border-bottom: 1px solid #ddd;
     box-sizing: border-box;
+    z-index: 10; /* ensure it stays above other elements */
 
     /* Include padding and border in width */
 }
@@ -67,8 +68,11 @@ p {
     max-width: 800px;
     /* Control the width to prevent stretching */
     margin: 0 auto;
-    padding-top: 1rem;
+    padding-top: 100px; /* Adjust based on navbar height */
     /* Add top padding for spacing */
+}
+.page-container{
+    padding-top: 100px;
 }
 
 .intro-section {
@@ -90,6 +94,7 @@ p {
     border-radius: 50%;
     object-fit: cover;
     margin: 0rem auto;
+    margin-top: 0rem;
 }
 
 .research p {
@@ -202,7 +207,7 @@ section {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    max-width: 800px;
+    max-width: 630px;
     margin: 0 auto;
     padding-top: 1rem;
     box-sizing: border-box;
