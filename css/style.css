@@ -1,0 +1,267 @@
+/* Basic Styling */
+body,
+h1,
+h2,
+h3,
+p,
+a {
+    margin: 0;
+    padding: 0;
+    font-family: 'Public Sans', sans-serif;
+    color: #000;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    margin: 0.5rem 0;
+}
+
+/* Top Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+
+    /* Include padding and border in width */
+}
+
+.title-section h1 {
+    font-size: 1.8rem;
+
+}
+
+.right-links {
+    display: flex;
+    gap: 1rem;
+    /* Optional: controls spacing between the links */
+    align-items: center;
+    /* Vertically centers the items */
+}
+
+.right-links h2 {
+    margin: 0;
+    /* Removes any default margin */
+}
+
+.right-links a {
+    margin: 0 1rem;
+}
+
+/* Main Content */
+.container {
+    display: flex;
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    /* Center-align contents */
+    max-width: 800px;
+    /* Control the width to prevent stretching */
+    margin: 0 auto;
+    padding-top: 1rem;
+    /* Add top padding for spacing */
+}
+
+.intro-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    max-width: 1500px;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    /* Adjusts vertical space */
+    margin-bottom: 2rem;
+}
+
+.intro-image img {
+    max-width: 600px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0rem auto;
+}
+
+.research p {
+    align-items: center;
+    object-fit: cover;
+    max-width: 600px;
+    margin: 1rem auto;
+}
+
+.experience-img img {
+    max-width: 100px;
+    /* Control image size */
+    max-height: 100px;
+    object-fit: contain;
+    /* Avoid stretching */
+    margin: 1rem auto;
+}
+
+.education-img img {
+    max-width: 100px;
+    /* Control image size */
+    max-height: 100px;
+    /* Avoid stretching */
+    border-radius: 50%;
+    /* Circular shape */
+    object-fit: cover;
+    /* Avoid stretching */
+    margin: 1rem auto;
+    margin-top: 3rem;
+}
+
+.education-img-master img {
+    max-width: 100px;
+    /* Control image size */
+    max-height: 100px;
+    /* Avoid stretching */
+    border-radius: 50%;
+    /* Circular shape */
+    object-fit: cover;
+    /* Avoid stretching */
+    margin: 1rem auto;
+}
+
+.intro-text {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.intro-text p {
+    max-width: 750px;
+    margin: 1rem auto;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.intro-text h2 {
+    width: 750px;
+    font-size: 2rem;
+}
+
+.intro-text h3 {
+    font-size: 2rem;
+    position: auto;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+.experience h3,
+.research h3,
+.education h3 {
+    position: relative;
+    /* To contain the absolutely positioned ::after */
+    text-align: center;
+    margin: 0rem 0;
+    padding: 1rem;
+}
+
+.research h3::after,
+.experience h3::after,
+.education h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    /* Shift to center */
+    width: 50%;
+    /* Adjust the length */
+    height: 1px;
+    background-color: #ddd;
+}
+
+/* General Section Styling */
+section {
+    width: 100%;
+    /* Make sections take full container width */
+    margin: 3rem 0;
+    /* Adds 3rem of spacing above and below each section */
+    padding: 1.5rem 2rem;
+    /* Inner padding for left and right space */
+    /* Adds padding within each section to create more whitespace */
+    text-align: center;
+    /* Center-aligns content for a cleaner look */
+    line-height: 1.6;
+    /* Improves readability by spacing out lines */
+}
+
+.projects-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 1rem;
+    box-sizing: border-box;
+    padding: 2rem;
+}
+
+
+.project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    /* Optional rounded corners */
+    padding: 2rem;
+    margin: 1.5rem 0;
+    max-width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+.project-image {
+    align-self: center;
+    width: 100%;
+}
+
+.project-image img {
+    display: block;
+    max-width:100%;
+    height: auto;
+    margin: 0 auto;
+    /* Center image within project */
+}
+
+.project-details h2,
+.project-details p {
+    margin: 0.5rem 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 700px) {
+    .intro-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .intro-image img,
+    .intro-text {
+        max-width: 100%;
+        /* keep it responsive */
+        width: auto;
+        /* allows shrinking naturally */
+    }
+
+    .projects-container {
+        padding: 1rem;
+    }
+
+    .project {
+        padding: 1.5rem;
+    }
+}
