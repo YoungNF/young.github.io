@@ -84,7 +84,6 @@ p {
     margin-bottom: 1rem;
     max-width: 1500px;
     flex-direction: column;
-    align-items: center;
     gap: 1.5rem;
     /* Adjusts vertical space */
     margin-bottom: 2rem;
@@ -145,24 +144,21 @@ p {
     text-align: center;
 }
 
+.intro-text h3 {
+    font-size: 2rem;
+    position: auto;
+    padding-bottom: 0.5rem;
+    max-width: 500px;
+    margin: 0rem auto;
+}
+
 .intro-text p {
     max-width: 750px;
     margin: 1rem auto;
     font-size: 1.03rem;
     line-height: 1.6;
-}
-
-.intro-text h2 {
-    width: 750px;
-    font-size: 2rem;
-}
-
-.intro-text h3 {
-    font-size: 2rem;
-    position: auto;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.5rem;
+    border-top: 1px solid #ddd;
+    margin-top: 1rem;
 }
 
 .experience h3,
