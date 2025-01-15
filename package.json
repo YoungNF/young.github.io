@@ -1,0 +1,28 @@
+{
+  "name": "young.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roachmaster555/young.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roachmaster555/young.github.io/issues"
+  },
+  "homepage": "https://github.com/roachmaster555/young.github.io#readme",
+  "dependencies": {
+    "aos": "^2.3.4",
+    "node-fetch": "^3.3.2",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "@figma/rest-api-spec": "^0.22.0"
+  }
+}
