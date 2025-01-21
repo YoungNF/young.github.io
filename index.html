@@ -4,106 +4,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoyoung Maeng Portfolio</title>
+    <title>YOUNG Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Navigation -->
-    <div class="navbar">
-        <div class="title-section">
-            <h1><a href="index.html">YOUNG.</a></h1>
+    <header>
+        <!-- Navigation -->
+        <div class="navbar">
+            <div class="title-section">
+                <h1><a href="index.html">YOUNG.</a></h1>
+            </div>
+            <div class="right-links">
+                <h2><i><a href="index.html">Profile</a></i></h2>
+                <h2><i><a href="projects.html">Projects</a></i></h2>
+                <h2><i><a href="publications.html">Publications</a></i></h2>
+                <h2><i><a href="competencies.html">Competencies</a></i></h2>
+                <h2 class="contact"><i><a href="contact.html">Contact</a></i></h2>
+            </div>
         </div>
-        <div class="right-links">
-            <h2><i><a href="projects.html">Profile</a></i></h2>
-            <h2><i><a href="publications.html">Projects</a></i></h2>
-            <h2><i><a href="publications.html">Publications</a></i></h2>
-            <h2><i><a href="competencies.html">Competencies</a></i></h2>
-            <h2><i><a href="contact.html">Contact</a></i></h2>
-        </div>
-    </div>
+    </header>
 
-    <main class="container">
+    <main class="main-content">
         <!-- Introduction Section -->
         <section class="intro-section">
             <div class="intro-text">
                 <h3>Hello, I'm Hoyoung Maeng (맹호영 in Korean), but feel free to call me Young</h3>
-
             </div>
+
             <div class="intro-image">
                 <img src="images/main/bw_profile.png" alt="Profile Image">
             </div>
         </section>
     
-        <!-- Research Interests -->
-        <section class="research">
-            <h3>Research Interests</h3>
-            <p>design computing, human-computer interaction, idea exploration, design collaboration, 3D reconstruction, 3D
-                model synthesis</p>
+        <!-- Research Experiences Section -->
+        <section class="research-experiences">
+            <h4 class="section-title">Research Experiences.</h4>
+            <!-- Carousel Section -->
+            <div class="carousel">
+                <ul class="carousel-track">
+                    <!-- Research Experience Cards -->
+                    <li class="carousel-slide current">
+                        <div class="card">
+                            <div class="card-logo">
+                                <img src="images/main/recon.png" alt="ReconLabs Logo">
+                            </div>
+                            <div class="card-content">
+                                <h5 class="card-title">AI Researcher<br>01.2023 — 11.2024</h5>
+                                <p class="card-details">Research Team,<br>RECON Labs,<br>Seoul, South Korea</p>
+                            </div>
+                        </div>
+                    </li>                        
+                    <li class="carousel-slide">
+                        <div class="card">
+                            <div class="card-logo">
+                                <img src="images/main/hanyang.png" alt="Hanyang Logo">
+                            </div>
+                            <div class="card-content">
+                                <h5 class="card-title">Junior Researcher<br>03.2022 — 12.2022</h5>
+                                <p class="card-details">Design Informatics Lab,<br>Hanyang University,<br>Seoul, South Korea</p>
+                            </div>
+                        </div>
+                    </li>                        
+                    <li class="carousel-slide">
+                        <div class="card">
+                            <div class="card-logo">
+                                <img src="images/main/hanyang.png" alt="Hanyang Logo">
+                            </div>
+                            <div class="card-content">
+                                <h5 class="card-title">Graduate Research Assistant<br>03.2020 — 02.2022</h5>
+                                <p class="card-details">Design Informatics Lab,<br>Hanyang University,<br>Seoul, South Korea</p>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Add more slides as needed -->
+                </ul>
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-arrow left">&#8592;</button>
+                <div class="carousel-indicators">
+                    <!-- scripts.js creates indicators here according to the number of cards -->
+                </div>
+                <button class="carousel-arrow right">&#8594;</button>
+            </div>
+
+
         </section>
     
-        <!-- Research Experience -->
-        <section class="experience">
-            <h3>Research Experience</h3>
-            <div class="experience-item">
-                <div class="experience-img">
-                    <img src="images/main/recon.png" alt="Profile Image">
-                </div>
-                <div>
-                    <strong>AI Researcher <br> (01.2023 — Present)</strong><br>
-                    <small>Research Team, RECON Labs, Seoul, South Korea</small>
-                </div>
-                <div class="education-img">
-                    <img src="images/main/hanyang.png" alt="Profile Image">
-                </div>
-                <div>
-                    <strong>Junior Researcher <br> (03.2022 — 12.2022)</strong><br>
-                    <small>Design Informatics Lab, Hanyang University, Seoul, South Korea</small>
-                </div>
-                <div class="education-img">
-                    <img src="images/main/hanyang.png" alt="Profile Image">
-                </div>
-                <div>
-                    <strong>Graduate Research Assistant <br> (03.2020 — 02.2022)</strong><br>
-                    <small>Design Informatics Lab, Hanyang University, Seoul, South Korea</small>
-                </div>
-                <div class="education-img">
-                    <img src="images/main/hanyang.png" alt="Profile Image">
-                </div>
-                <div>
-                    <strong>Undergraduate Research Assistant <br> (03. 2019 — 02.2020)</strong><br>
-                    <small>Design Informatics Lab, Hanyang University, Seoul, South Korea</small>
-                </div>
-            </div>
-        </section>
-    
-        <!-- Education -->
-        <section class="education">
-            <h3>Education</h3>
-            <div class="education-item">
-                <div class="education-img-master">
-                    <img src="images/main/hanyang.png" alt="Profile Image">
-                </div>
-                <div>
-                    <strong>M.S., Hanyang University <br> (03.2020 — 02.2022)</strong><br>
-                    <p>Department of Interior Architecture Design</p>
-                    <p>Thesis: <a href="http://hanyang.dcollection.net/public_resource/pdf/200000600650_20230123172459.pdf"
-                            target="_blank" ">Moderating Design Idea for Design Collaboration</a></p>
-                    <p>Advisor: <a href="https://designinformatics.hanyang.ac.kr/People_Kyung-Hoon-Hyun" target="_blank"
-                           ">Dr. Kyung Hoon Hyun</a></p>
-                </div>
-                <div class="education-img">
-                    <img src="images/main/hanyang.png" alt="Profile Image">
-                </div>
-                <div>
-                    <strong>B.S., Hanyang University <br> (03.2014 — 02.2020)</strong><br>
-                    <p>Department of Interior Architecture Design</p>
-                    <strong><i>CUM LAUDE</i> </strong>
-                </div>
-            </div>
-        </section>
-    </main>
+
+
+    <script src="js/script.js"></script>
 </body>
 
 </html>

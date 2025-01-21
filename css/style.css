@@ -1,14 +1,30 @@
 /* Basic Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+html, body{
+    overflow-x: hidden;
+}
+
 body,
 h1,
 h2,
 h3,
+h4,
+h5,
+h6,
 p,
 a {
-    margin: 0;
-    padding: 0;
     font-family: 'Public Sans', sans-serif;
     color: #000;
+}
+
+body {
+    background-color: #f8f8f8;
+    /* Light gray background */
 }
 
 a {
@@ -27,243 +43,306 @@ p {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 1rem 2rem;
+    padding: 9px 15%;
     background-color: #fff;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #A9A9A9;
     box-sizing: border-box;
     z-index: 10; /* ensure it stays above other elements */
+    align-items: center;
 
     /* Include padding and border in width */
 }
 
-.title-section h1 {
-    font-size: 1.8rem;
-
+.title-section h1 a {
+    font-size: 26px;
+    font-weight: bold;
+    background-color: white;
 }
 
 .right-links {
     display: flex;
-    gap: 1rem;
+    gap: 30px;
     /* Optional: controls spacing between the links */
     align-items: center;
     /* Vertically centers the items */
+    text-decoration: none;
+    background-color: white;
+    
 }
 
 .right-links h2 {
-    margin: 0;
-    /* Removes any default margin */
+    font-size: 15px;
+    font-style: italic;
+    font-weight: lighter;
+    background-color: white;
 }
 
-.right-links a {
-    margin: 0 1rem;
+.right-links .contact {
+    background-color: #007aff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Main Content */
-.container {
-    display: flex;
-    flex-direction: column;
-    /* Stack items vertically */
-    align-items: center;
-    /* Center-align contents */
-    max-width: 800px;
-    /* Control the width to prevent stretching */
-    margin: 0 auto;
-    padding-top: 100px; /* Adjust based on navbar height */
-    /* Add top padding for spacing */
-    box-sizing: border-box;
+.right-links .contact a {
+    color: white;
 }
-.page-container{
-    padding-top: 100px;
-    box-sizing: border-box;
+
+.right-links .contact:hover {
+    background-color: #007bffb8;
+    /* Darker blue on hover */
 }
 
 .intro-section {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
-    max-width: 1500px;
     flex-direction: column;
-    gap: 1.5rem;
-    /* Adjusts vertical space */
-    margin-bottom: 2rem;
-}
-
-.intro-image img {
-    max-width: 450px;
-    height: auto;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0rem auto;
-    margin-top: 0rem;
-}
-
-.research p {
-    align-items: center;
-    object-fit: cover;
-    max-width: 600px;
-    margin: 1rem auto;
-}
-
-.experience-img img {
-    max-width: 100px;
-    /* Control image size */
-    max-height: 100px;
-    object-fit: contain;
-    /* Avoid stretching */
-    margin: 1rem auto;
-}
-
-.education-img img {
-    max-width: 100px;
-    /* Control image size */
-    max-height: 100px;
-    /* Avoid stretching */
-    border-radius: 50%;
-    /* Circular shape */
-    object-fit: cover;
-    /* Avoid stretching */
-    margin: 1rem auto;
-    margin-top: 3rem;
-}
-
-.education-img-master img {
-    max-width: 100px;
-    /* Control image size */
-    max-height: 100px;
-    /* Avoid stretching */
-    border-radius: 50%;
-    /* Circular shape */
-    object-fit: cover;
-    /* Avoid stretching */
-    margin: 1rem auto;
-}
-
-.intro-text {
-    font-size: 1rem;
-    text-align: center;
+    margin: 0 auto;
+    padding-top: 300px;
+    padding-bottom: 20%;
+    width: 100%;
+    background: linear-gradient(to bottom, #404040 0%, #7d7d7d 60%, #f8f8f8 100%)
+    /* Gradient background */
 }
 
 .intro-text h3 {
-    font-size: 2rem;
-    position: auto;
-    padding-bottom: 0.5rem;
-    max-width: 500px;
-    margin: 0rem auto;
-}
-
-.intro-text p {
-    max-width: 750px;
-    margin: 1rem auto;
-    font-size: 1.03rem;
-    line-height: 1.6;
-    border-top: 1px solid #ddd;
-    margin-top: 1rem;
-}
-
-.experience h3,
-.research h3,
-.education h3 {
-    position: relative;
-    /* To contain the absolutely positioned ::after */
+    font-size: clamp(35px, 3vw , 40px);
+    width: 80%;
     text-align: center;
-    margin: 0rem 0;
-    padding: 1rem;
+    max-width: 1060px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(130, 191, 255, 0.8),
+                0 0 40px rgba(130, 191, 255, 0.6),
+                0 0 60px rgba(130, 191, 252, 0.4);
 }
 
-.research h3::after,
-.experience h3::after,
-.education h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 25%;
-    /* Shift to center */
-    width: 50%;
-    /* Adjust the length */
-    height: 1px;
-    background-color: #ddd;
-}
-
-/* General Section Styling */
-section {
-    width: 100%;
-    /* Make sections take full container width */
-    margin: 3rem 0;
-    /* Adds 3rem of spacing above and below each section */
-    padding: 1.5rem 2rem;
-    /* Inner padding for left and right space */
-    /* Adds padding within each section to create more whitespace */
-    text-align: center;
-    /* Center-aligns content for a cleaner look */
-    line-height: 1.6;
-    /* Improves readability by spacing out lines */
-}
-
-.projects-container {
+.intro-image img {
     display: flex;
+    justify-content: center;
+    width: clamp(350px, 23%, 500px);
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+/* Initial State: Invisible */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    /* Move slightly down initially */
+    transition: opacity 2s ease, transform 2s ease;
+    /* Smooth fade-in */
+}
+
+/* Visible State: Fully Visible */
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+    /* Return to the original position */
+}
+
+/* ------------------- */
+/* Research Experiences Section */
+.research-experiences {
+    text-align: left;
+    margin: 30% 0;
+}
+
+/* Section Title */
+.section-title {
+    margin: 50px 9%;
+    font-size: 46px;
+    font-weight: 400;
+    letter-spacing: -2px;
+}
+
+/* Carousel Styles */
+.carousel {
+    position: relative;
+    display: flex;
+    align-items: center; /* aligns child elements in vertical-axis */
+    overflow: hidden;
+    background-color: #943838;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 50px;
+    /* Space between slides */
+    height: 100%;
+    /* Ensure the track takes the full height of the carousel */
+    padding: 20px;
+    padding-left: 0;
+    /* Remove unintended padding */
+}
+
+.carousel-slide {
+    display: flex;
+    /* Enables child alignment */
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 1300px;
+    min-width: 300px;
+    /* Responsive width */
+    height: 100%;
+    text-align: center;
+    /* Centers content within each slide */
+    margin: 0 auto;
+    /* Centers the slide within the carousel track */
+    gap: 60px;
+    /* Adds spacing between items inside the card */
+}
+
+.carousel-nav {
+    display: flex;
+    justify-content: center;
+    /* Center arrows horizontally */
     align-items: center;
+    margin-top: 20px;
+    /* Add spacing below the carousel */
+    gap: 20px
+    /* Space between the arrows */
+}
+
+
+/* Carousel Buttons */
+.carousel-arrow {
+    background-color: #1D1D1F;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-arrow:hover {
+    opacity: 0.6;
+    /* Slight hover effect when the arrow is available */
+}
+
+.carousel-arrow.left {
+    left: 20px;
+    opacity: 0.5;
+}
+
+.carousel-arrow.right {
+    right: 20px;
+}
+.carousel-indicators {
+    display: flex;
+    gap: 10px;
+    /* Space between dots */
+}
+
+.carousel-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: #BFBFBF;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-indicator.current {
+    background-color: #1D1D1F;
+}
+
+
+.card {
+    width: 1300px;
+    height: 640px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 29px;
+    padding: auto;
+}
+
+.card-logo img {
+    max-width: 275px;
+    height: auto;
+}
+
+.card-content {
+    width: 330px;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 630px;
-    margin: 0 auto;
-    padding-top: 1rem;
-    box-sizing: border-box;
-    padding: 2rem;
-}
-
-
-.project {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    /* Optional rounded corners */
-    padding: 2rem;
-    margin: 1.5rem 0;
-    width: 103%;
-    text-align: center;
-    box-sizing: border-box;
-}
-.project-image {
-    align-self: center;
-    width: 100%;
+    gap: 30px;
 }
 
-.project-image img {
-    display: block;
-    max-width:100%;
-    height: auto;
-    margin: 0 auto;
-    /* Center image within project */
+.card-title{
+    font-size: 24px;
+    font-weight: 500;
 }
 
-.project-details h2,
-.project-details p {
-    margin: 0.5rem 0;
+.card-details {
+    font-size: 22px;
+    font-weight: 400;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 700px) {
-    .intro-section {
+
+
+
+
+
+
+@media (max-width: 1200px) {
+    .carousel-slide {
+        width: 80%;
+        /* Slightly smaller on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-slide {
+        width: 95%;
+        /* Even smaller on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-slide {
+        width: 100%;
+        /* Full width for very small screens */
+        max-width: none;
+        /* Remove max-width restriction */
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-nav {
         flex-direction: column;
-        text-align: center;
+        gap: 10px;
     }
 
-    .intro-image img,
-    .intro-text {
-        max-width: 100%;
-        /* keep it responsive */
-        width: auto;
-        /* allows shrinking naturally */
+    .carousel-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
     }
 
-    .projects-container {
-        padding: 1rem;
-    }
-
-    .project {
-        padding: 1.5rem;
+    .carousel-indicator {
+        width: 8px;
+        height: 8px;
     }
 }
