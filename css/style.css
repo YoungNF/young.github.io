@@ -20,6 +20,7 @@ p,
 a {
     font-family: 'Public Sans', sans-serif;
     color: #000;
+    letter-spacing: -0.035em;
 }
 
 body {
@@ -73,7 +74,7 @@ p {
 .right-links h2 {
     font-size: 15px;
     font-style: italic;
-    font-weight: lighter;
+    font-weight: 300;
     background-color: white;
 }
 
@@ -167,7 +168,7 @@ p {
     display: flex;
     align-items: center; /* aligns child elements in vertical-axis */
     overflow: hidden;
-    background-color: #943838;
+    /* background-color: #943838; */
     width: 100%;
 }
 
@@ -199,6 +200,65 @@ p {
     /* Centers the slide within the carousel track */
     gap: 60px;
     /* Adds spacing between items inside the card */
+    cursor: pointer;
+    /* Indicates the element is clickable */
+}
+
+.carousel-button {
+    display: block;
+    text-decoration: none;
+    /* Remove underline */
+    color: inherit;
+    /* Inherit text color */
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    /* Add smooth animations */
+}
+
+/* Hover Effect */
+.carousel-button:hover .card {
+    transform: scale(1.02);
+    background-color: #d9d9d9;
+        /* Slightly darker shade */
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    /* opacity: 0.6; */
+
+}
+
+.card {
+    width: 1300px;
+    height: 640px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 29px;
+    padding: auto;
+}
+
+.card-logo img {
+    max-width: 275px;
+    height: auto;
+}
+
+.card-content {
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.card-details {
+    font-size: 22px;
+    font-weight: 400;
 }
 
 .carousel-nav {
@@ -262,6 +322,115 @@ p {
     background-color: #1D1D1F;
 }
 
+.research-statement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: auto;
+    gap: 100px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.main-statement {
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.statement-texts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.statement-texts p {
+    max-width: 300px;
+    font-size: 24px;
+    font-weight: 300;
+    flex: 1;
+    word-wrap: break-word;
+}
+
+.biolinks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+/* Education Section */
+.education {
+    text-align: left;
+    margin: 30% 0;
+}
+
+/* Carousel-small Styles */
+.carousel-small {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* aligns child elements in vertical-axis */
+    overflow: hidden;
+    /* background-color: #943838; */
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 50px;
+    /* Space between slides */
+    height: 100%;
+    /* Ensure the track takes the full height of the carousel */
+    padding: 20px;
+    padding-left: 0;
+    /* Remove unintended padding */
+}
+
+.carousel-slide {
+    display: flex;
+    /* Enables child alignment */
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 1300px;
+    min-width: 300px;
+    /* Responsive width */
+    height: 100%;
+    text-align: center;
+    /* Centers content within each slide */
+    margin: 0 auto;
+    /* Centers the slide within the carousel track */
+    gap: 60px;
+    /* Adds spacing between items inside the card */
+    cursor: pointer;
+    /* Indicates the element is clickable */
+}
+
+.carousel-button {
+    display: block;
+    text-decoration: none;
+    /* Remove underline */
+    color: inherit;
+    /* Inherit text color */
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    /* Add smooth animations */
+}
+
+/* Hover Effect */
+.carousel-button:hover .card {
+    transform: scale(1.02);
+    background-color: #d9d9d9;
+    /* Slightly darker shade */
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    /* opacity: 0.6; */
+
+}
 
 .card {
     width: 1300px;
@@ -290,7 +459,7 @@ p {
     gap: 30px;
 }
 
-.card-title{
+.card-title {
     font-size: 24px;
     font-weight: 500;
 }
@@ -300,7 +469,16 @@ p {
     font-weight: 400;
 }
 
-
+.carousel-nav {
+    display: flex;
+    justify-content: center;
+    /* Center arrows horizontally */
+    align-items: center;
+    margin-top: 20px;
+    /* Add spacing below the carousel */
+    gap: 20px
+        /* Space between the arrows */
+}
 
 
 

@@ -33,6 +33,22 @@ slides.forEach((slide, index) => {
 
 });
 
+document.querySelectorAll('.carousel').forEach((carousel) => {
+    const isSmall = carousel.classList.contains('carousel-small');
+    const gap = isSmall ? 90 : 50; // Adjust gap based on type
+    const slideWidth = isSmall ? 640 : 1300;
+
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const nextButton = carousel.querySelector('.carousel-arrow.right');
+    const prevButton = carousel.querySelector('.carousel-arrow.left');
+    const indicatorsContainer = carousel.querySelector('.carousel-indicators');
+
+
+    initializeCarousel(track, slides, nextButton, prevButton, indicatorsContainer, { gap, slideWidth });
+});
+
+
 // Designate 'current' to the target slide and indicator
 const moveToSlide = (track, currentSlide, targetSlide) => {
     const windowWidth = window.innerWidth; // Window width
@@ -62,7 +78,6 @@ const moveToSlide = (track, currentSlide, targetSlide) => {
     console.log('Target Index:', targetIndex);
     console.log('Updated Current Indicator:', targetIndicator);
 };
-0
 
 // Update slides
 const updateSlides = (currentSlide, targetSlide) => {
