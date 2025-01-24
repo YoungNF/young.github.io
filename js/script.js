@@ -1,98 +1,138 @@
-// Select carousel elements
-const track = document.querySelector('.carousel-track');
-const slides = Array.from(track.children);
-const nextButton = document.querySelector('.carousel-arrow.right');
-const prevButton = document.querySelector('.carousel-arrow.left');
-const indicatorsContainer = document.querySelector('.carousel-indicators');
+// script.js
 
-// Get the gap value between slides
-const trackStyles = window.getComputedStyle(track);
-const gapValue = trackStyles.getPropertyValue('gap');
-const gap = parseFloat(gapValue);
+function handleWindowResize() {
+    const carousels = document.querySelectorAll('.carousel');
+    carousels.forEach((carousel) => {
+        const track = carousel.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const indicatorsContainer = carousel.querySelector('.carousel-indicators');
+        const isSmall = carousel.classList.contains('carousel-small');
+        const gap = isSmall ? 90 : 50;
 
-// Calculate slide width dynamically (include margin)
-// 70px total margin (35px per side)
-const slideWidth = slides[0].getBoundingClientRect().width; 
+        // Dynamically update carousel state
+        manageCarousel(track, slides, indicatorsContainer, gap);
+    });
+}
 
+function initializeIndicators(track, slides, indicatorsContainer) {
+    slides.forEach((_, index) => {
+        // Create and append indicator for each slide
+        const dot = document.createElement('dot');
+        dot.classList.add('carousel-indicator');
+        // Mark the first indicator as current
+        if (index === 0) dot.classList.add('current'); 
+        indicatorsContainer.appendChild(dot);
+        dot.addEventListener('click', (e) => handleIndicatorClick(track, slides, indicatorsContainer, e));
+    });
+}
 
-
-// Arrange slides next to each other
-slides.forEach((slide, index) => {
+function setupSlidePosition(track, slides, gap) {
     // Position slides horizontally
-    slide.style.left = `${(slideWidth+gap) * index}px`;
-    console.log(`slideWidth: ${slideWidth}`);
-    console.log(`Slide ${index} Left Position: ${slide.style.left}`);
+    slides.forEach((slide, index) => {
+        slide.style.left = `${(slide.getBoundingClientRect().width + gap) * index}px`;
+        console.log(`Slide ${index} Left Position: ${slide.style.left}`);
+    });
 
-    // Create and append indicator for each slide
-    const dot = document.createElement('dot');
-    dot.classList.add('carousel-indicator');
-    if (index === 0) {
-        dot.classList.add('current'); // Mark the first indicator as current
-    }
-    indicatorsContainer.appendChild(dot);
+    // Center the first slide
+    const currentSlide = track.querySelector('.current');
+    console.log('Current Slide:', currentSlide);
 
-});
+    return currentSlide;
+}
+// function setupIndicatorPosition(track, slides, indicatorsContainer) {
+//     slides.forEach((_, index) => {
+//         const indicators = Array.from(indicatorsContainer.children);
+//         indicators.forEach((dot, index) => {
+//             if (index === currentIndex) {
+//                 dot.classList.add('current');
+//             } else {
+//                 dot.classList.remove('current');
+//             }
+//         });
 
-document.querySelectorAll('.carousel').forEach((carousel) => {
-    const isSmall = carousel.classList.contains('carousel-small');
-    const gap = isSmall ? 90 : 50; // Adjust gap based on type
-    const slideWidth = isSmall ? 640 : 1300;
+//     });
+// }
 
-    const track = carousel.querySelector('.carousel-track');
-    const slides = Array.from(track.children);
-    const nextButton = carousel.querySelector('.carousel-arrow.right');
-    const prevButton = carousel.querySelector('.carousel-arrow.left');
-    const indicatorsContainer = carousel.querySelector('.carousel-indicators');
+function moveSlideAndIndicator(track, slides, currentSlide, targetSlide) {
+    const targetIndex = slides.indexOf(targetSlide);
 
+    // Ensure the target slide exists
+    if (targetIndex === -1) return;
 
-    initializeCarousel(track, slides, nextButton, prevButton, indicatorsContainer, { gap, slideWidth });
-});
+    // Calculate the left position of the target slide
+    const targetLeft = parseFloat(targetSlide.style.left);
+    const windowWidth = window.innerWidth;
+    const slideWidth = targetSlide.offsetWidth;
 
-
-// Designate 'current' to the target slide and indicator
-const moveToSlide = (track, currentSlide, targetSlide) => {
-    const windowWidth = window.innerWidth; // Window width
-    const targetLeft = parseFloat(targetSlide.style.left); // Get the target slide's left position
-    // const offset = Math.max((windowWidth - targetSlide.offsetWidth) / 2, 0);// Calculate the centering offset
-    const offset = (windowWidth - targetSlide.offsetWidth) / 2;// Calculate the centering offset
+    // Adjust to center the target slide
+    const offset = (windowWidth - slideWidth) / 2;
     const adjustedLeft = -(Math.round(targetLeft - offset));
+    // Move the track to the target slide
+    track.style.transform = `translateX(${adjustedLeft}px)`;
 
-    console.log('Target Left:', targetLeft);
-    console.log('Offset:', offset);
-    console.log('Adjusted Left:', adjustedLeft);
-    console.log('Updated Current Slide:', targetSlide);
-    console.log('Updated Transform Value1 :', track.style.transform);
-    track.style.transform = `translateX(${adjustedLeft}px)`; // Center the target slide
-    
+    // Update the active slide
     updateSlides(currentSlide, targetSlide);
 
-    console.log('Updated Transform Value2 :', track.style.transform);
+    // Update indicators (if applicable)
+    const indicatorsContainer = track.closest('.carousel').querySelector('.carousel-indicators');
+    if (indicatorsContainer) {
+        
+        console.log('Target Index:', targetIndex);
+        const currentIndicator = indicatorsContainer.querySelector('.current');
+        const targetIndicator = indicatorsContainer.children[targetIndex];
+        console.log('Indicators Container Checked:', currentIndicator, targetIndicator);
+        updateIndicators(currentIndicator, targetIndicator);
+    }
+
+    console.log("moveSlideAndIndicator Done");
+}
 
 
-    // Update indicators
-    const currentIndicator = indicatorsContainer.querySelector('.current');
-    const targetIndex = slides.findIndex(slide => slide === targetSlide);
-    const targetIndicator = indicatorsContainer.children[targetIndex];
-    updateIndicators(currentIndicator, targetIndicator);
 
-    console.log('Target Index:', targetIndex);
-    console.log('Updated Current Indicator:', targetIndicator);
-};
 
-// Update slides
-const updateSlides = (currentSlide, targetSlide) => {
-    currentSlide.classList.remove('current');
-    targetSlide.classList.add('current');
-};
 
-// Update indicators
-const updateIndicators = (currentIndicator, targetIndicator) => {
-    currentIndicator.classList.remove('current');
-    targetIndicator.classList.add('current');
-};
+// // Update slides
+// const updateSlides = (currentSlide, targetSlide) => {
+//     currentSlide.classList.remove('current');
+//     targetSlide.classList.add('current');
+// };
 
-// Handle the display of the arrows
-const toggleArrows = (slides, prevButton, nextButton, targetIndex) => {
+function updateSlides(currentSlide, targetSlide) {
+    if (currentSlide) currentSlide.classList.remove('current');
+    if (targetSlide) targetSlide.classList.add('current');
+}
+
+// // Update indicators
+// const updateIndicators = (currentIndicator, targetIndicator) => {
+//     currentIndicator.classList.remove('current');
+//     targetIndicator.classList.add('current');
+// };
+
+function updateIndicators(currentIndicator, targetIndicator) {
+    if (currentIndicator) currentIndicator.classList.remove('current');
+    if (targetIndicator) targetIndicator.classList.add('current');
+}
+
+// // Handle the display of the arrows
+// const toggleArrows = (slides, prevButton, nextButton, targetIndex) => {
+//     if (targetIndex === 0) {
+//         prevButton.style.opacity = '0.5';
+//         prevButton.style.pointerEvents = 'none'; // Disable click
+//     } else {
+//         prevButton.style.opacity = '1';
+//         prevButton.style.pointerEvents = 'auto'; // Enable click
+//     }
+
+//     if (targetIndex === slides.length - 1) {
+//         nextButton.style.opacity = '0.5';
+//         nextButton.style.pointerEvents = 'none'; // Disable click
+//     } else {
+//         nextButton.style.opacity = '1';
+//         nextButton.style.pointerEvents = 'auto'; // Enable click
+//     }
+// };
+
+function toggleArrows(slides, prevButton, nextButton, targetIndex) {
     if (targetIndex === 0) {
         prevButton.style.opacity = '0.5';
         prevButton.style.pointerEvents = 'none'; // Disable click
@@ -108,78 +148,173 @@ const toggleArrows = (slides, prevButton, nextButton, targetIndex) => {
         nextButton.style.opacity = '1';
         nextButton.style.pointerEvents = 'auto'; // Enable click
     }
-};
+}
 
-// Click right
-nextButton.addEventListener('click', () => {
+// Handle arrow clicks
+function handleArrowClick(track, slides, direction) {
     const currentSlide = track.querySelector('.current');
-    const nextSlide = currentSlide.nextElementSibling;
+    const currentIndex = slides.indexOf(currentSlide);
+    const targetIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
 
-    if (!nextSlide) return; // Exit if there's no next slide
+    // Ensure the target index is within bounds
+    if (targetIndex < 0 || targetIndex >= slides.length) return;
 
-    const nextIndex = slides.findIndex(slide => slide === nextSlide);
-    console.log('Next Slide:',nextSlide);
-    moveToSlide(track, currentSlide, nextSlide);
-    toggleArrows(slides, prevButton, nextButton, nextIndex);
-    console.log('Current Slide:', currentSlide);
-});
+    const targetSlide = slides[targetIndex];
+    moveSlideAndIndicator(track, slides, currentSlide, targetSlide);
 
-// Click left
-prevButton.addEventListener('click', () => {
-    const currentSlide = track.querySelector('.current');
-    const prevSlide = currentSlide.previousElementSibling;
+    // Update arrows (optional: disable/hide if at start/end)
+    const carousel = track.closest('.carousel');
+    const nextButton = carousel.querySelector('.carousel-arrow.right');
+    const prevButton = carousel.querySelector('.carousel-arrow.left');
+    toggleArrows(slides, prevButton, nextButton, targetIndex);
+}
 
-    if (!prevSlide) return; // Exit if there's no previous slide
-
-    const prevIndex = slides.findIndex(slide => slide === prevSlide);
-    console.log('Prev Slide:',prevSlide);
-    moveToSlide(track, currentSlide, prevSlide);
-    toggleArrows(slides, prevButton, nextButton, prevIndex);
-    console.log('Current Slide:', currentSlide);
-});
-
-indicatorsContainer.addEventListener('click', (event) => {
+function handleIndicatorClick(track, slides, indicatorsContainer, event) {
     const targetIndicator = event.target.closest('.carousel-indicator');
-
     if (!targetIndicator) return; // Ignore clicks outside indicators
 
     const currentSlide = track.querySelector('.current');
+
+    // Determine the index of the clicked indicator
     const targetIndex = Array.from(indicatorsContainer.children).indexOf(targetIndicator);
     const targetSlide = slides[targetIndex];
 
-    moveToSlide(track, currentSlide, targetSlide);
-    toggleArrows(slides, prevButton, nextButton, targetIndex);
-    console.log('Target Slide:', targetSlide);
-});
+    // Move to the target slide
+    moveSlideAndIndicator(track, slides, currentSlide, targetSlide);
 
-const initializeCarousel = () => {
-    const currentSlide = track.querySelector('.current') || slides[0];// Find the first slide with the 'current' class
-    if (!currentSlide) {
-        console.error("No slide with 'current' class found. Defaulting to the first slide.");
-        return;
+    // Update arrows (optional)
+    const carousel = track.closest('.carousel');
+    const nextButton = carousel.querySelector('.carousel-arrow.right');
+    const prevButton = carousel.querySelector('.carousel-arrow.left');
+    toggleArrows(slides, prevButton, nextButton, targetIndex);
+}
+
+// // Click right
+// nextButton.addEventListener('click', () => {
+//     const currentSlide = track.querySelector('.current');
+//     const nextSlide = currentSlide.nextElementSibling;
+
+//     if (!nextSlide) return; // Exit if there's no next slide
+
+//     const nextIndex = slides.findIndex(slide => slide === nextSlide);
+//     console.log('Next Slide:',nextSlide);
+//     moveToSlide(track, currentSlide, nextSlide);
+//     toggleArrows(slides, prevButton, nextButton, nextIndex);
+//     console.log('Current Slide:', currentSlide);
+// });
+// // nextButton.addEventListener('click', () => handleArrowClick(track, slides, 'next'));
+
+// // Click left
+// prevButton.addEventListener('click', () => {
+//     const currentSlide = track.querySelector('.current');
+//     const prevSlide = currentSlide.previousElementSibling;
+
+//     if (!prevSlide) return; // Exit if there's no previous slide
+
+//     const prevIndex = slides.findIndex(slide => slide === prevSlide);
+//     console.log('Prev Slide:',prevSlide);
+//     moveToSlide(track, currentSlide, prevSlide);
+//     toggleArrows(slides, prevButton, nextButton, prevIndex);
+//     console.log('Current Slide:', currentSlide);
+// });
+// // prevButton.addEventListener('click', () => handleArrowClick(track, slides, 'prev'));
+
+// Click indicators
+// indicatorsContainer.addEventListener('click', (event) => {
+//     const targetIndicator = event.target.closest('.carousel-indicator');
+
+//     if (!targetIndicator) return; // Ignore clicks outside indicators
+
+//     const currentSlide = track.querySelector('.current');
+//     const targetIndex = Array.from(indicatorsContainer.children).indexOf(targetIndicator);
+//     const targetSlide = slides[targetIndex];
+
+//     moveToSlide(track, currentSlide, targetSlide);
+//     toggleArrows(slides, prevButton, nextButton, targetIndex);
+//     console.log('Target Slide:', targetSlide);
+// });
+// indicatorsContainer.addEventListener('click', (event) => {
+//     const targetIndicator = event.target.closest('.carousel-indicator');
+//     if (!targetIndicator) return; // Ignore clicks outside indicators
+
+//     const targetIndex = Array.from(indicatorsContainer.children).indexOf(targetIndicator);
+//     handleIndicatorClick(track, slides, indicatorsContainer, targetIndex);
+// });
+
+function initializeCarousel(track, slides, indicatorsContainer, gap, slideThreshold) {
+    // Position slides
+    slides.forEach((slide, index) => {
+        slide.style.left = `${(slide.getBoundingClientRect().width + gap) * index}px`;
+    });
+
+    // Initialize event listeners for arrows
+    if (slides.length > slideThreshold) {
+        nextButton.style.display = 'block';
+        prevButton.style.display = 'block';
+        indicatorsContainer.style.display = 'block';
+        nextButton.addEventListener('click', () => handleArrowClick(track, slides, currentSlide, 'next'));
+        prevButton.addEventListener('click', () => handleArrowClick(track, slides, currentSlide, 'prev'));
+    } else {
+        nextButton.style.display = 'none';
+        prevButton.style.display = 'none';
+        indicatorsContainer.style.display = 'none';
     }
 
-    const targetLeft = parseFloat(currentSlide.style.left); // Get the current slide's left position
-    const cardWidth = currentSlide.offsetWidth; // Card width
-    const windowWidth = window.innerWidth; // Window width
+    // Position indicators
+    initializeIndicators(track, slides, indicatorsContainer);
 
-    // Adjust offset for cases where cardWidth > windowWidth
-    // const offset = Math.max((windowWidth - cardWidth) / 2, 0);
-    const offset = (windowWidth - cardWidth) / 2;
-    const adjustedLeft = -(Math.round(targetLeft - offset));
-    track.style.transform = `translateX(${adjustedLeft}px)`; // Center the first card
-    
-    console.log('Slide Left:', currentSlide.style.left);
-    console.log('Offset:', offset);
-    console.log('Window Width:', window.innerWidth);
-    console.log('Card Width:', currentSlide.offsetWidth);
-    console.log('Calculated Offset:', adjustedLeft);
-    console.log('Transform Value:', track.style.transform);
-    console.log('Current Slide:', currentSlide);
+    console.log('Initialization Survived?');
+}
+
+
+function manageCarousel(track, slides, indicatorsContainer, gap){
+    console.log('track:', track);
+    console.log('slides:', slides);
+    console.log('indicatorsContainer:', indicatorsContainer);
+    console.log('config:', config);
+    console.log('gap:', gap);
+
+
+    // Position slides
+    const currentSlide = setupSlidePosition(track, slides, gap);
+    console.log('setupSlidePosition Done');
+
+    // Position indicators
+    // setupIndicatorPosition(track, slides, indicatorsContainer);
+    // console.log('setupIndicatorPosition Done');
+
+    moveSlideAndIndicator(track, slides, currentSlide, currentSlide);
+    console.log('Event Listeners Added');
 };
 
 // Call the function after the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', initializeCarousel);
+document.addEventListener('DOMContentLoaded', () => {
+    const carousels = document.querySelectorAll('.carousel');
+
+    carousels.forEach((carousel) => {
+        const track = carousel.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const indicatorsContainer = carousel.querySelector('.carousel-indicators');
+        const isSmall = carousel.classList.contains('carousel-small');
+        const gap = isSmall ? 90 : 50;
+        const slideThreshold = isSmall ? 2 : 1;
+
+        // Initialize the carousel
+        initializeCarousel(track, slides, indicatorsContainer, gap, slideThreshold);
+    });
+
+    // Trigger a manual resize to ensure carousels are correctly managed on load
+    handleWindowResize();
+});
+
+window.addEventListener('resize', handleWindowResize);
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
       // Select elements to fade in
       const fadeInElements = document.querySelectorAll('.fade-in');
@@ -189,6 +324,3 @@ document.addEventListener('DOMContentLoaded', () => {
           element.classList.add('visible');
       });
 });
-
-
-window.addEventListener('resize', initializeCarousel);

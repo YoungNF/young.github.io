@@ -168,13 +168,13 @@ p {
     display: flex;
     align-items: center; /* aligns child elements in vertical-axis */
     overflow: hidden;
-    /* background-color: #943838; */
+    background-color: #943838;
     width: 100%;
 }
 
 .carousel-track {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.5s ease;
     gap: 50px;
     /* Space between slides */
     height: 100%;
@@ -182,6 +182,9 @@ p {
     padding: 20px;
     padding-left: 0;
     /* Remove unintended padding */
+    width: max-content;
+    /* Ensure the track shrinks to fit its contents */
+    position: relative;
 }
 
 .carousel-slide {
@@ -189,9 +192,11 @@ p {
     /* Enables child alignment */
     box-sizing: border-box;
     flex: 0 0 auto;
-    width: 100%;
+    /* width: 100%; */
+    width: clamp(640px, 85%, 1300px);
+    /* Dynamically adjust width */
     max-width: 1300px;
-    min-width: 300px;
+    min-width: 640px;
     /* Responsive width */
     height: 100%;
     text-align: center;
@@ -202,6 +207,16 @@ p {
     /* Adds spacing between items inside the card */
     cursor: pointer;
     /* Indicates the element is clickable */
+}
+.carousel.carousel-small .carousel-slide {
+    width: 640px;
+    max-width: unset;
+    /* No max width for small carousel */
+}
+
+.carousel-slide.current {
+    /* Center the current slide by offsetting it */
+    transform: translateX(calc((100vw - 100%) / 2));
 }
 
 .carousel-button {
@@ -217,10 +232,7 @@ p {
 /* Hover Effect */
 .carousel-button:hover .card {
     transform: scale(1.02);
-    background-color: #d9d9d9;
-        /* Slightly darker shade */
-    /* background-color: rgba(0, 0, 0, 0.2); */
-    /* opacity: 0.6; */
+    /* background-color: #d9d9d9; */
 
 }
 
@@ -235,6 +247,22 @@ p {
     background: #FFFFFF;
     border-radius: 29px;
     padding: auto;
+}
+
+.carousel.carousel-small .card {
+    width: 640px;
+    max-width: unset;
+    /* No max width for small carousel */
+    width: 640px;
+    height: 640px;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 29px;
+    padding: 32px;
 }
 
 .card-logo img {
@@ -368,119 +396,122 @@ p {
     text-align: left;
     margin: 30% 0;
 }
-
-/* Carousel-small Styles */
-.carousel-small {
-    position: relative;
-    display: flex;
-    align-items: center;
-    /* aligns child elements in vertical-axis */
-    overflow: hidden;
-    /* background-color: #943838; */
-    width: 100%;
+.research-projects {
+    text-align: left;
+    margin: 30% 0;
+}
+.publications {
+    text-align: left;
+    margin: 30% 0;
+}
+.patents {
+    text-align: left;
+    margin: 30% 0;
 }
 
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    gap: 50px;
-    /* Space between slides */
-    height: 100%;
-    /* Ensure the track takes the full height of the carousel */
-    padding: 20px;
-    padding-left: 0;
-    /* Remove unintended padding */
-}
-
-.carousel-slide {
-    display: flex;
-    /* Enables child alignment */
-    box-sizing: border-box;
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: 1300px;
-    min-width: 300px;
-    /* Responsive width */
-    height: 100%;
-    text-align: center;
-    /* Centers content within each slide */
-    margin: 0 auto;
-    /* Centers the slide within the carousel track */
-    gap: 60px;
-    /* Adds spacing between items inside the card */
-    cursor: pointer;
-    /* Indicates the element is clickable */
-}
-
-.carousel-button {
-    display: block;
-    text-decoration: none;
-    /* Remove underline */
-    color: inherit;
-    /* Inherit text color */
-    transition: transform 0.7s ease, box-shadow 0.7s ease;
-    /* Add smooth animations */
-}
-
-/* Hover Effect */
-.carousel-button:hover .card {
-    transform: scale(1.02);
-    background-color: #d9d9d9;
-    /* Slightly darker shade */
-    /* background-color: rgba(0, 0, 0, 0.2); */
-    /* opacity: 0.6; */
-
-}
-
-.card {
-    width: 1300px;
-    height: 640px;
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 60px;
-    align-items: center;
-    background: #FFFFFF;
-    border-radius: 29px;
-    padding: auto;
-}
-
-.card-logo img {
-    max-width: 275px;
-    height: auto;
-}
-
-.card-content {
-    width: 330px;
+/* Competencies Section */
+.competencies {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 30px;
+    padding: 20px;
+    gap: 40px;
+    /* Gap between awards and certifications */
+    background-color: #f8f8f8;
+    text-align: center;
 }
 
-.card-title {
-    font-size: 24px;
+/* Section Title */
+.competencies .section-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Awards and Certifications Containers */
+.awards,
+.certifications {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    /* Limit width for readability */
+}
+
+/* Award and Certification Items */
+.award-item,
+.certification-item {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    font-family: 'Public Sans', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.award-item:hover,
+.certification-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Date Styling */
+.award-item p:first-child,
+.certification-item p:first-child {
+    font-size: 16px;
     font-weight: 500;
+    color: #666;
+    margin-bottom: 5px;
+    font-style: italic;
 }
 
-.card-details {
-    font-size: 22px;
+/* Award/Certification Title */
+.award-item p:nth-child(2),
+.certification-item p:nth-child(2) {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Organization Name */
+.award-item p:nth-child(3),
+.certification-item p:nth-child(3) {
+    font-size: 16px;
     font-weight: 400;
+    color: #555;
+    margin-bottom: 10px;
 }
 
-.carousel-nav {
-    display: flex;
-    justify-content: center;
-    /* Center arrows horizontally */
-    align-items: center;
-    margin-top: 20px;
-    /* Add spacing below the carousel */
-    gap: 20px
-        /* Space between the arrows */
+/* Description Text */
+.award-item p:last-child,
+.certification-item p:last-child {
+    font-size: 14px;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.5;
 }
 
+/* Ensure Responsiveness */
+/* @media (max-width: 768px) {
+    .competencies .section-title {
+        font-size: 24px;
+    }
 
+    .award-item,
+    .certification-item {
+        padding: 10px;
+    }
+
+    .award-item p,
+    .certification-item p {
+        font-size: 14px;
+    }
+}
 
 
 
@@ -523,4 +554,4 @@ p {
         width: 8px;
         height: 8px;
     }
-}
+} */
