@@ -32,42 +32,27 @@ function initializeIndicators(slides, indicatorsContainer) {
     console.log("this is initializing stage", slides.length)
 }
 
-// function setupSlidePosition(track, slides, gap) {
-//     // Position slides horizontally
-//     slides.forEach((slide, index) => {
-//         slide.style.left = `${(slide.getBoundingClientRect().width + gap) * index}px`;
-//         console.log(`Slide ${index} Left Position: ${slide.style.left}`);
-//     });
-    
-//     // Center the first slide
-//     const currentSlide = track.querySelector('.current');
-//     console.log('Current Slide:', currentSlide);
-
-//     return currentSlide;
-// }
-
 function moveSlideAndIndicator(carousel, track, slides, currentSlide, targetSlide) {
-    // Return if the target slide is the same as the current slide
-    // if (currentSlide === targetSlide) return;
-
     const targetIndex = slides.indexOf(targetSlide);
 
     // Ensure the target slide exists
     if (targetIndex === -1) return;
 
     // Calculate the left position of the target slide
-    const targetLeft = parseFloat(targetSlide.style.left);
-    const windowWidth = window.innerWidth;
+    // const targetLeft = parseFloat(targetSlide.style.left);
+    // const windowWidth = window.innerWidth;
+    const targetLeft = targetSlide.offsetLeft;    
+    const carouselWidth = carousel.clientWidth;
     const slideWidth = targetSlide.offsetWidth;
 
     // Adjust to center the target slide
-    const offset = (windowWidth - slideWidth) / 2;
-    const adjustedLeft = -(Math.round(targetLeft - offset));
+    const offset = (carouselWidth - slideWidth) / 2;
+    const adjustedLeft = -(targetLeft - offset);
     // Move the track to the target slide
     track.style.transform = `translateX(${adjustedLeft}px)`;
 
     // Update the active slide
-    updateSlides(currentSlide, targetSlide);
+    updateCurrentSlides(currentSlide, targetSlide);
 
     // Update indicators (if applicable)
     const indicatorsContainer = carousel.querySelector('.carousel-indicators');
@@ -79,9 +64,15 @@ function moveSlideAndIndicator(carousel, track, slides, currentSlide, targetSlid
         const currentIndicator = indicatorsContainer.querySelector('.current');
         const targetIndicator = indicatorsContainer.children[targetIndex];
         console.log('Indicators Container Checked:', currentIndicator, targetIndicator);
-        updateIndicators(currentIndicator, targetIndicator);
+        updateCurrentIndicators(currentIndicator, targetIndicator);
     }
-
+    console.log('Slide Width:', slideWidth);
+    console.log('Track Width:', track.getBoundingClientRect());
+    console.log('Carousel Width:', carouselWidth);
+    console.log('Window Width:', window.innerWidth);
+    console.log('Target Left:', targetLeft);
+    console.log('Adjusted Left:', adjustedLeft);
+    console.log('Actual number:', track.style.transform);
     console.log("moveSlideAndIndicator Done");
 }
 
@@ -91,7 +82,7 @@ function initializeCarousel(track, slides, navContainer, indicatorsContainer, ne
     // Position slides
     slides.forEach((slide, index) => {
         slide.style.left = `${(slide.getBoundingClientRect().width + gap) * index}px`;
-        // console.log(`Slide ${index} Left Position: ${slide.style.left}`);
+        console.log(`Slide ${index} Left Position: ${slide.style.left}`);
         if (index === 0) {
             slide.classList.add('current'); // Mark the first indicator as current
         }
@@ -119,30 +110,12 @@ function initializeCarousel(track, slides, navContainer, indicatorsContainer, ne
     // console.log('Initialization Survived?');
 }
 
-// function manageCarousel(carousel, track, slides, indicatorsContainer, gap){
-//     console.log('track:', track);
-//     console.log('slides:', slides);
-//     console.log('indicatorsContainer:', indicatorsContainer);
-//     console.log('gap:', gap);
-
-//     // Position slides
-//     // const currentSlide = setupSlidePosition(track, slides, gap);
-//     // console.log('setupSlidePosition Done');
-
-//     // Position indicators
-//     // setupIndicatorPosition(track, slides, indicatorsContainer);
-//     // console.log('setupIndicatorPosition Done');
-
-//     moveSlideAndIndicator(carousel, track, slides, currentSlide, currentSlide);
-//     console.log('Event Listeners Added');
-// };
-
-function updateSlides(currentSlide, targetSlide) {
+function updateCurrentSlides(currentSlide, targetSlide) {
     if (currentSlide) currentSlide.classList.remove('current');
     if (targetSlide) targetSlide.classList.add('current');
 }
 
-function updateIndicators(currentIndicator, targetIndicator) {
+function updateCurrentIndicators(currentIndicator, targetIndicator) {
     if (currentIndicator) currentIndicator.classList.remove('current');
     if (targetIndicator) targetIndicator.classList.add('current');
 }
@@ -182,8 +155,8 @@ function handleArrowClick(event, slides, direction) {
     console.log('Target Index:', targetIndex);
     const targetSlide = slides[targetIndex];
     moveSlideAndIndicator(carousel, track, slides, currentSlide, targetSlide);
-    // updateSlides(slides, currentIndex, targetIndex);
-    // updateIndicators(track, currentIndex, targetIndex);
+    // updateCurrentSlides(slides, currentIndex, targetIndex);
+    // updateCurrentIndicators(track, currentIndex, targetIndex);
 
     // Update arrows (optional: disable/hide if at start/end)
     // const carousel = track.closest('.carousel');
@@ -208,8 +181,8 @@ function handleIndicatorClick(event, slides, indicatorsContainer) {
 
     // Move to the target slide
     moveSlideAndIndicator(carousel, track, slides, currentSlide, targetSlide); //<-- REMOVE THIS
-    // updateSlides(slides, currentIndex, targetIndex);
-    // updateIndicators(track, currentIndex, targetIndex);
+    // updateCurrentSlides(slides, currentIndex, targetIndex);
+    // updateCurrentIndicators(track, currentIndex, targetIndex);
 
     // Update arrows (optional)
     const nextButton = carousel.querySelector('.carousel-arrow.right');
